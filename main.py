@@ -1,6 +1,36 @@
 # This is a ptmk test task
 # author: Templin Konstantin (qnbhd)
 # 10 aug, 2020
+import sys
+from ptmkworker import PtmkWorker
+
 
 if __name__ == '__main__':
-    pass
+    if len(sys.argv) < 2 or len(sys.argv) > 7:
+        raise TypeError('Incorrect input arguments set')
+
+    choosed_word_id = int(sys.argv[1]) - 1
+
+    worker = PtmkWorker()
+    handlers = [worker.create_bd_handler, worker.create_record_handler,
+                worker.out_unique_records_handler,
+                worker.random_creator_handler, worker.sample_handler]
+
+    args = sys.argv[2:]
+    kwargs = {}
+
+    if len(args) > 0:
+        # create user case
+        kwargs = {
+            'fullname': args[0:3],
+            'born_date': args[3],
+            'gender': args[4]
+        }
+
+    try:
+        current_handler = handlers[choosed_word_id]
+        current_handler(**kwargs)
+    except IndexError:
+        print('Incorrect work id')
+    except TypeError:
+        print('Incorrect input arguments set')
