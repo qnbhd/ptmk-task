@@ -4,17 +4,23 @@
 import sys
 from ptmkworker import PtmkWorker
 
+CASE_MIN_ARGS_COUNT = 2
+CASE_MAX_ARGS_COUNT = 7
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2 or len(sys.argv) > 7:
+    if len(sys.argv) < CASE_MIN_ARGS_COUNT or len(sys.argv) > CASE_MAX_ARGS_COUNT:
         raise TypeError('Incorrect input arguments set')
 
     choosed_word_id = int(sys.argv[1]) - 1
 
     worker = PtmkWorker()
-    handlers = [worker.create_bd_handler, worker.create_record_handler,
-                worker.out_unique_records_handler,
-                worker.random_creator_handler, worker.sample_handler]
+    handlers = [
+        worker.create_bd_handler,
+        worker.create_record_handler,
+        worker.out_unique_records_handler,
+        worker.random_creator_handler,
+        worker.sample_handler
+    ]
 
     args = sys.argv[2:]
     kwargs = {}

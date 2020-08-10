@@ -52,7 +52,7 @@ class PtmkWorker:
     def create_record_instance(fullname: str,
                                born_date: str, gender: str) -> User:
         born_date_inst = datetime.datetime.\
-            strptime(born_date + " 00:00", "%d.%m.%Y %H:%M")  # simplification
+            strptime(born_date, "%d.%m.%Y")  # simplification
         return User(fullname, born_date_inst, gender)
 
     def create_record_handler(self, fullname: List[str],
