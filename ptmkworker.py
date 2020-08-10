@@ -97,6 +97,7 @@ class PtmkWorker:
     def random_creator_handler(self, **kwargs):
         records = [self.get_random_record(gen='special') for i in range(100)]
         records += [self.get_random_record() for i in range(1000)]
+        #TODO: change to 100 000
 
         session = self.create_session()
 
