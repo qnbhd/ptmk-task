@@ -1,5 +1,3 @@
-import datetime
-
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -11,7 +9,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     fullname = Column(String)
     born_date = Column(Date)
-    gender = Column(String)
+    gender = Column(String(1))
 
     def __init__(self, fullname, born_date, male):
         self.fullname = fullname
@@ -30,5 +28,7 @@ class User(Base):
             return today.year - dob.year
 
     def __repr__(self):
-        old = self.age(datetime.datetime.now())
-        return "User: <'%s','%s', '%s', '%s'>" % (self.fullname, self.born_date, self.gender, old)
+        old = self.age(self.born_date)
+        return "User: <'%s','%s', '%s', '%s'>" % (self.fullname,
+                                                  self.born_date,
+                                                  'male' if self.gender == 'm' else 'female', old)

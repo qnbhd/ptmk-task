@@ -19,7 +19,8 @@ if __name__ == '__main__':
         worker.create_record_handler,
         worker.out_unique_records_handler,
         worker.random_creator_handler,
-        worker.sample_handler
+        worker.sample_handler,
+        worker.out_first_records,
     ]
 
     args = sys.argv[2:]
