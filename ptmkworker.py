@@ -11,6 +11,7 @@ from user import Base, User
 
 SQLDEBUG = False
 FILENAME = 'ptmk'
+GENERATE_COUNT = 1000
 
 
 class PtmkWorker:
@@ -85,7 +86,7 @@ class PtmkWorker:
 
     def random_creator_handler(self, **kwargs):
         records = [self.get_random_record(gen='special') for _ in range(100)]
-        records += [self.get_random_record() for i in range(1000)]
+        records += [self.get_random_record() for _ in range(GENERATE_COUNT)]
 
         session = self.create_session()
 
@@ -109,7 +110,7 @@ class PtmkWorker:
     def out_first_records(self, records_count=10):
         """
         Print first 'records_count' records in database
-        :param records:
+        :param records_count:
         :return: -
         """
         session = self.create_session()
